@@ -1,6 +1,10 @@
 <!-- SHOWS LOGIN PAGE -->
 <!-- IDEA! SHOWS FRONT OF NOTE BOOK WITH THE LOGIN OPTIONS -->
 <script setup>
+const user = useSupabaseUser()
+if (user.value) {
+  navigateTo(window.location.origin + '/')
+}
 const supabase = useSupabaseClient()
 const handleGoogleLogin = async () => {
   try {
