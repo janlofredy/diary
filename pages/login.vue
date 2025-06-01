@@ -24,7 +24,7 @@ const handleGithubLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: 'https://didactic-broccoli-x9v447grj4w34q4-3000.app.github.dev/confirm',
+        redirectTo: '/confirm',
       },
     })
     if (error) {
