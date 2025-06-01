@@ -2,8 +2,8 @@
 const user = useSupabaseUser()
 
 watch(user, () => {
-  if (user.value) {
-    return navigateTo(window.location.origin + '/')
+  if (user) {
+    navigateTo('/')
   }
 }, { immediate: true })
 </script>

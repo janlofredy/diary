@@ -1,11 +1,15 @@
 <!-- SHOWS LOGIN PAGE -->
 <!-- IDEA! SHOWS FRONT OF NOTE BOOK WITH THE LOGIN OPTIONS -->
 <script setup>
-const user = useSupabaseUser()
-if (user.value) {
-  navigateTo(window.location.origin + '/')
-}
 const supabase = useSupabaseClient()
+const user = useSupabaseUser()  
+onMounted(() => {
+  console.log(user.value)
+  if (user) {
+    // If not logged in, redirect to login page
+    navigateTo('/')
+  }
+})
 const handleGoogleLogin = async () => {
   try {
     const { error } = await supabase.auth.signInWithOAuth({
