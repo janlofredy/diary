@@ -7,7 +7,7 @@ const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: '/confirm',
+        redirectTo: window.location.origin + '/confirm',
       },
     })
     if (error) {
@@ -24,7 +24,7 @@ const handleGithubLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: '/confirm',
+        redirectTo: window.location.origin + '/confirm',
       },
     })
     if (error) {
