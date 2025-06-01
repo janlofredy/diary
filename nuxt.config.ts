@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   modules: [
     '@vite-pwa/nuxt',
     '@nuxtjs/supabase',
-    '@element-plus/nuxt'
+    '@element-plus/nuxt',
+    '@nuxt/icon'
   ],
   pwa: {
 
