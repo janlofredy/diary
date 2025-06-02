@@ -5,26 +5,6 @@
 <script setup>
 // This is the default page that shows when the user is logged in
 // You can add more functionality here, like fetching user data or displaying entries
-const supabase = useSupabaseClient()
-const user = useSupabaseUser()  
-onMounted(() => {
-  console.log(user)
-  if (!user) {
-    // If not logged in, redirect to login page
-    navigateTo('/login')
-  }
-})
-const handleSignOut = async () => {
-  try {
-    const { error } = await supabase.auth.signOut()
-    if (error) {
-      console.error('Error signing out:', error)
-    }
-    navigateTo('/login')
-  } catch (error) {
-    console.error(error)
-  }
-}
 </script>
 <template>
   <div class="container">
@@ -40,9 +20,6 @@ const handleSignOut = async () => {
           </div>
         </div>
       </div>
-    </div>
-    <div class="logout">
-      <button @click="handleSignOut">Logout</button>
     </div>
   </div>
 </template>

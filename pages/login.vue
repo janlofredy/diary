@@ -1,21 +1,20 @@
 <!-- SHOWS LOGIN PAGE -->
 <!-- IDEA! SHOWS FRONT OF NOTE BOOK WITH THE LOGIN OPTIONS -->
 <script setup>
-const supabase = useSupabaseClient()
-const user = useSupabaseUser()  
-onMounted(() => {
-  console.log(user.value)
-  if (user) {
-    // If not logged in, redirect to login page
-    navigateTo('/')
-  }
+definePageMeta({
+  layout: "clean",
+  middleware: ['noauth']
 })
+const supabase = useSupabaseClient()
+const route = useRoute()
+const redirectBackTo = route.redirectedFrom?.fullPath || '/confirm' // Redirect back to the previous page when logged in
+
 const handleGoogleLogin = async () => {
   try {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin + '/confirm',
+        redirectTo: window.location.origin + redirectBackTo,
       },
     })
     if (error) {
@@ -32,7 +31,7 @@ const handleGithubLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: window.location.origin + '/confirm',
+        redirectTo: window.location.origin + redirectBackTo,
       },
     })
     if (error) {
