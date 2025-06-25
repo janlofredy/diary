@@ -1,16 +1,30 @@
 <template>
-  <div class="drawer" style="width: 50px;" >
-    <el-button @click="isOpen = !isOpen">
-      Toggle Drawer
-    </el-button>
-    <el-drawer
-      size="100%"
-      v-model="isOpen"
-      direction="btt"
-      append-to=".drawer"
-    >
-      <el-button @click="handleSignOut">Default</el-button>
-    </el-drawer>
+  <div
+    class="drawer-handle flex justify-center items-center cursor-pointer absolute left-1/2 -translate-x-1/2 -top-6 w-24 h-6"
+    :class="{ 'drawer-handle-open': isOpen }"
+    @click="isOpen = !isOpen"
+  >
+    <span class="drawer-handle-bar block w-16 h-2 rounded bg-gray-400"></span>
+  </div>
+  <div
+    class="drawer"
+    :class="{ 'drawer-open': isOpen }"
+    style="background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png'); background-size: cover;"
+  >
+    <div class="drawer-header" @click="isOpen = !isOpen">
+      <span
+        class="drawer-arrow"
+        :class="{ 'drawer-arrow-open': isOpen }"
+      >&#9660;</span>
+    </div>
+    <div class="drawer-content">
+      <!-- Place your buttons or content here -->
+      <button type="button" class="btn btn-primary">Action 1</button>
+      <button type="button" class="btn btn-success">Action 2</button>
+    </div>
+    <div class="logout-bottom">
+      <button type="button" @click="handleSignOut" class="btn btn-logout">Sign Out</button>
+    </div>
   </div>
 </template>
 

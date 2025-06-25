@@ -2,14 +2,6 @@
 <!-- IDEA -->
 <!-- SHOWS AN OPEN NOTEBOOK WITH DATE ON TOP RIGHT -->
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { createClient } from '@supabase/supabase-js'
-
-// Supabase setup
-const supabaseUrl = 'https://YOUR_SUPABASE_URL'
-const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'
-const supabase = createClient(supabaseUrl, supabaseKey)
-
 // Constants
 const ROWS = 5
 const BOOKS_PER_ROW = 15
