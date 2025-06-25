@@ -1,36 +1,38 @@
-
 <script lang="ts" setup>
-const supabase = useSupabaseClient()
-const bookshelves = ref(null)
-
-onMounted(async function () {
-  const { data, error } = await supabase
-    .from('bookshelves')
-    .select('id, description, notebooks(id, description)')
-    .eq('user_id', supabase.auth.user.id)
-    .range(0, 10)
-    .order('created_at', { ascending: false })
-
-  if (error) {
-    console.error('Error loading bookshelves:', error)
-  } else {
-    bookshelves.value = data
-  }
-})
+defineProps<{
+  shelfType: string;
+  backgroundType: string;
+  notebooks: Array<{
+    id: number | string;
+    description: string;
+  }>;
+}>();
 </script>
 <template>
-  <div v-if="bookshelves">
-    <div v-for="bookshelf in bookshelves" :key="bookshelf.id">
-      <h2>{{ bookshelf.description }}</h2>
-      <ul>
-        <li v-for="notebook in bookshelf.notebooks" :key="notebook.id">
-          {{ notebook.description }}
-        </li>
-      </ul>
+<div class="bookshelf">
+  <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="Bookshelf" class="bookshelf-image" />
+  <div class="shelves">
+    <div
+      v-for="(row, rowIndex) in Math.ceil((notebooks?.length ?? 0) / 15)"
+      :key="rowIndex"
+      class="shelf-row"
+    >
+      <div
+        v-for="bookIndex in 15"
+        :key="bookIndex"
+        class="book-slot"
+      >
+        <div
+          v-if="notebooks[(rowIndex * 15) + (bookIndex - 1)]"
+          class="book"
+        >
+          {{ notebooks[(rowIndex * 15) + (bookIndex - 1)].description }}
+        </div>
+      </div>
     </div>
   </div>
+</div>
 </template>
-
 
 <style>
 
