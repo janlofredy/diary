@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxtjs/supabase',
     '@element-plus/nuxt',
-    '@nuxt/icon'
+    '@nuxt/icon',
   ],
   pwa: {
 
