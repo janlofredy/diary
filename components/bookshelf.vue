@@ -1,15 +1,3 @@
-<template>
-  <div v-if="bookshelves">
-    <div v-for="bookshelf in bookshelves" :key="bookshelf.id">
-      <h2>{{ bookshelf.description }}</h2>
-      <ul>
-        <li v-for="notebook in bookshelf.notebooks" :key="notebook.id">
-          {{ notebook.description }}
-        </li>
-      </ul>
-    </div>
-  </div>
-</template>
 
 <script lang="ts" setup>
 const supabase = useSupabaseClient()
@@ -28,8 +16,21 @@ onMounted(async function () {
   } else {
     bookshelves.value = data
   }
-}
+})
 </script>
+<template>
+  <div v-if="bookshelves">
+    <div v-for="bookshelf in bookshelves" :key="bookshelf.id">
+      <h2>{{ bookshelf.description }}</h2>
+      <ul>
+        <li v-for="notebook in bookshelf.notebooks" :key="notebook.id">
+          {{ notebook.description }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
 
 <style>
 

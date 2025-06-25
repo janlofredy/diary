@@ -13,6 +13,8 @@ const currentShelf = ref(1)
 const totalShelves = ref(1)
 const hoveredBook = ref(null)
 
+const supabase = useSupabaseClient()
+
 // Fetch books from Supabase
 const fetchBooks = async () => {
   const { data, error } = await supabase
@@ -40,120 +42,48 @@ const nextShelf = () => {
   if (currentShelf.value < totalShelves.value) currentShelf.value++
 }
 </script>
-
 <template>
-  <div class="bookshelf-container">
-    <div class="shelf-arrows">
-      <button @click="prevShelf" :disabled="currentShelf === 1">&lt;</button>
-    </div>
-    <div class="bookshelf">
-      <div v-for="row in ROWS" :key="row" class="shelf-row">
-        <div
-          v-for="book in shelfBooks.slice((row-1)*BOOKS_PER_ROW, row*BOOKS_PER_ROW)"
-          :key="book.id"
-          class="book"
-          @mouseenter="hoveredBook = book"
-          @mouseleave="hoveredBook = null"
-        >
-          <img :src="book.cover_url" :alt="book.title" class="book-cover" />
+  <div class="fixed inset-0 flex items-center justify-center bg-yellow-50 min-h-screen">
+    <div class="flex flex-row items-center relative">
+      <div class="flex justify-center my-2">
+        <button
+          @click="prevShelf"
+          :disabled="currentShelf === 1"
+          class="text-2xl px-5 py-1 rounded bg-yellow-100 hover:bg-yellow-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        >&lt;</button>
+      </div>
+      <div class="flex flex-col gap-3 bg-yellow-100 p-5 rounded-2xl shadow-lg">
+        <div v-for="row in ROWS" :key="row" class="flex gap-2 min-h-[80px]">
+          <div
+            v-for="book in shelfBooks.slice((row-1)*BOOKS_PER_ROW, row*BOOKS_PER_ROW)"
+            :key="book.id"
+            class="w-10 h-15 bg-yellow-300 rounded shadow flex items-center justify-center transition-transform duration-100 cursor-pointer relative"
+            @mouseenter="hoveredBook = book"
+            @mouseleave="hoveredBook = null"
+          >
+            <img :src="book.cover_url" :alt="book.title" class="w-9 h-14 object-cover rounded-sm" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="shelf-arrows">
-      <button @click="nextShelf" :disabled="currentShelf === totalShelves">&gt;</button>
-    </div>
-    <div class="pagination">
-      Shelf {{ currentShelf }} / {{ totalShelves }}
-    </div>
-    <div v-if="hoveredBook" class="book-preview">
-      <div class="big-book">
-        <img :src="hoveredBook.cover_url" :alt="hoveredBook.title" />
-        <div class="book-title">{{ hoveredBook.title }}</div>
+      <div class="flex justify-center my-2">
+        <button
+          @click="nextShelf"
+          :disabled="currentShelf === totalShelves"
+          class="text-2xl px-5 py-1 rounded bg-yellow-100 hover:bg-yellow-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        >&gt;</button>
+      </div>
+      <div class="mt-3 text-lg text-yellow-800">
+        Shelf {{ currentShelf }} / {{ totalShelves }}
+      </div>
+      <div
+        v-if="hoveredBook"
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] z-50 bg-white/95 p-8 rounded-2xl shadow-2xl flex flex-col items-center"
+      >
+        <div>
+          <img :src="hoveredBook.cover_url" :alt="hoveredBook.title" class="w-44 h-65 object-cover rounded-lg shadow-lg" />
+          <div class="mt-4 text-2xl font-bold text-center">{{ hoveredBook.title }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.bookshelf-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-.shelf-arrows {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-}
-.shelf-arrows button {
-  font-size: 2rem;
-  padding: 0 20px;
-  cursor: pointer;
-}
-.bookshelf {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: #f5e6c8;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px #0002;
-}
-.shelf-row {
-  display: flex;
-  gap: 10px;
-  min-height: 80px;
-}
-.book {
-  width: 40px;
-  height: 60px;
-  background: #c9b18a;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px #0002;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.1s;
-  cursor: pointer;
-  position: relative;
-}
-.book-cover {
-  width: 36px;
-  height: 56px;
-  object-fit: cover;
-  border-radius: 2px;
-}
-.book-preview {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  z-index: 100;
-  background: rgba(255,255,255,0.95);
-  padding: 32px 48px;
-  border-radius: 16px;
-  box-shadow: 0 4px 32px #0005;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.big-book img {
-  width: 180px;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 2px 16px #0003;
-}
-.book-title {
-  margin-top: 16px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-}
-.pagination {
-  margin-top: 12px;
-  font-size: 1.1rem;
-  color: #7a5c2e;
-}
-</style>
