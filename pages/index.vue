@@ -57,7 +57,7 @@ const nextShelf = () => {
     <div v-else class="text-lg text-yellow-800">
       No shelves found.
     </div>
-    <div class="mt-3 text-lg text-yellow-800">
+    <div v-if="shelves.length > 0" class="mt-3 text-lg text-yellow-800">
       Shelf {{ currentShelf }} / {{ shelves.length }}
     </div>
   </div>
