@@ -7,11 +7,12 @@ const loading = ref(true)
 
 // Fetch shelves from Supabase
 const fetchNotebooks = async () => {
-  const { data, error, loading: isLoading } = await supabase
+  loading.value = true
+  const { data, error } = await supabase
     .from('shelf') 
     .select('*, notebook(*)')
     .order('id', { ascending: true })
-  loading.value = isLoading
+  loading.value = false
   if (!error) {
     shelves.value = data
   }

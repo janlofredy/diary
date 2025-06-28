@@ -1,8 +1,6 @@
-export { Book, BookStyle, ShelfStyle } 
-
 declare global {
     interface Book {
-        id: number | string;
+        id: string;
         title: string;
         description: string;
         bookStyle: BookStyle
@@ -10,6 +8,8 @@ declare global {
     interface BookStyle {
         spineThickness: number;
         color: string;
+        height?: number;
+        width?: number;
     }
     interface ShelfStyle {
         type: 'wood' | 'metal' | 'glass';

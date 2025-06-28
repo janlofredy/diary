@@ -10,18 +10,14 @@ defineProps<{
   <ShelfLayer
     v-for="layer in 5"
     :key="layer"
-    shelf-type="shelfType"
-    background-type="backgroundType"
+    :shelf-type="shelfType"
+    :background-type="backgroundType"
     >
     <ShelfBook
-      v-for="book in books?.slice((layer-1) * 10, 15)"
+      v-for="book in books?.slice((layer-1) * 10, layer * 10)"
       :key="book.id"
       :book="book"
     />
   </ShelfLayer>
 </div>
 </template>
-
-<style>
-
-</style>
