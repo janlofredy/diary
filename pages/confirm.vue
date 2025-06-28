@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: "clean",
-  middleware: ['noauth']
+  middleware: "noauth",
 })
 const user = useSupabaseUser()
 

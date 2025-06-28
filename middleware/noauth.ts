@@ -1,7 +1,6 @@
-export default defineNuxtRouteMiddleware((to, _from) => {
-    const user = useSupabaseUser()  
-    if (user) {
-      return navigateTo('/')
-    }
-  })
-  
+export default defineNuxtRouteMiddleware((_to, _from) => {
+  const session = useSupabaseSession()
+  if (session.value) {
+    return navigateTo('/')
+  }
+})
