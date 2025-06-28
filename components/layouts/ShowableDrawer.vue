@@ -1,6 +1,10 @@
 <script setup>
-const props = defineProps({
-  direction: { type: String, default: 'bottom', validator: v => ['bottom', 'top', 'left', 'right'].includes(v) }
+interface Props {
+  direction: 'bottom' | 'top' | 'left' | 'right'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  direction: 'bottom'
 })
 
 const isOpen = ref(false)
@@ -36,6 +40,14 @@ const drawerClasses = computed(() => {
 const handleToggle = () => {
   isOpen.value = !isOpen.value
 }
+
+// Expose methods for parent component access
+defineExpose({
+  toggle: handleToggle,
+  open:   () => { isOpen.value = true },
+  close:  () => { isOpen.value = false },
+  isOpen: readonly(isOpen)
+})
 </script>
 
 <template>

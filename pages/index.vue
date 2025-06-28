@@ -6,7 +6,7 @@ const currentShelf = ref(1)
 const loading = ref(true)
 
 // Fetch shelves from Supabase
-const fetchNotebooks = async () => {
+const fetchShelves = async () => {
   loading.value = true
   const { data, error } = await supabase
     .from('shelf') 
@@ -17,8 +17,8 @@ const fetchNotebooks = async () => {
     shelves.value = data
   }
 }
-onMounted(fetchNotebooks)
 
+onMounted(fetchShelves)
 
 // Pagination
 const prevShelf = () => {
