@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 interface Props {
-  direction: 'bottom' | 'top' | 'left' | 'right'
+  direction?: 'bottom' | 'top' | 'left' | 'right'
 }
 
 const props = withDefaults(defineProps<Props>(), {
