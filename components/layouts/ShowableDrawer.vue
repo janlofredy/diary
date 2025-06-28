@@ -60,7 +60,7 @@ const handleToggle = () => {
     >
       <div
         class="w-16 h-4 bg-gray-200 rounded-[16px_16px_16px_16px/8px_8px_24px_24px] shadow-md border-2 border-gray-300"
-      ></div>
+      />
     </div>
     <div
       v-else
@@ -71,7 +71,7 @@ const handleToggle = () => {
     >
       <div
         class="w-4 h-16 bg-gray-200 rounded-[16px_16px_16px_16px/8px_8px_24px_24px] shadow-md border-2 border-gray-300"
-      ></div>
+      />
     </div>
   </div>
 </template>

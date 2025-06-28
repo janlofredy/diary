@@ -56,14 +56,14 @@ const handleGithubLogin = async () => {
             @click="handleGoogleLogin"
             >
             SIGN IN WITH
-            <img src="/assets/google.png" alt="google" class="h-6 w-auto" />
+            <img src="/assets/google.png" alt="google" class="h-6 w-auto" >
             </button>
             <button
             class="bg-white border border-gray-500 p-4 my-2 flex flex-row gap-1 transition-colors duration-200 hover:bg-gray-100 hover:border-gray-700"
             @click="handleGithubLogin"
             >
             SIGN IN WITH 
-            <img src="/assets/github.png" alt="github" class="h-6 w-auto" />
+            <img src="/assets/github.png" alt="github" class="h-6 w-auto" >
             </button>
         </div>
       </div>

@@ -7,5 +7,8 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/supabase'
-  ]
+  ],
+  eslint: {
+    checker: true,
+  },
 })
