@@ -6,9 +6,9 @@ const currentShelf = ref(1)
 const loading = ref(true)
 
 // Fetch shelves from Supabase
-const fetchNotebooks = async () => {
+const fetchShelves = async () => {
   const { data, error, loading: isLoading } = await supabase
-    .from('shelf') 
+    .from('shelf')
     .select('*, notebook(*)')
     .order('id', { ascending: true })
   loading.value = isLoading
@@ -16,6 +16,8 @@ const fetchNotebooks = async () => {
     shelves.value = data
   }
 }
+
+onMounted(fetchShelves)
 onMounted(fetchNotebooks)
 
 
