@@ -44,7 +44,7 @@ const handleGithubLogin = async () => {
 </script>
 <template>
   <div class="h-screen flex items-center justify-center bg-gray-300">
-    <div class="bg-white h-1/2 w-1/2 md:h-1/2 md:w-1/2 sm:h-3/4 sm:w-5/6 shadow-lg">
+    <div class="bg-white w-full max-w-md sm:max-w-lg mx-4 shadow-lg rounded-lg">
       <div class="bg-gray-500 p-4">
         <h1 class="text-6xl font-bold text-center text-white">DIARY</h1>
       </div>
