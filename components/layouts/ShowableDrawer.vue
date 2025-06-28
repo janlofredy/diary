@@ -36,6 +36,14 @@ const drawerClasses = computed(() => {
 const handleToggle = () => {
   isOpen.value = !isOpen.value
 }
+
+// Expose methods for parent component access
+defineExpose({
+  toggle: handleToggle,
+  open:   () => { isOpen.value = true },
+  close:  () => { isOpen.value = false },
+  isOpen: readonly(isOpen)
+})
 </script>
 
 <template>
